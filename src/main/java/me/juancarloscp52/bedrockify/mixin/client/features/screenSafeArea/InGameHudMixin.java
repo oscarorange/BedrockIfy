@@ -40,7 +40,7 @@ public abstract class InGameHudMixin {
     @WrapOperation(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/util/Identifier;IIII)V"))
     private void drawTextureHotbar(DrawContext drawContext, RenderPipeline pipeline, Identifier texture, int x, int y, int width, int height, Operation<Void> original) {
         if(texture.equals(Identifier.ofVanilla("hud/hotbar_selection"))){
-            original.call(drawContext, pipeline, texture, x, y - screenBorder, width, height);
+            original.call(drawContext, pipeline, texture, x, y - screenBorder, width, 24);
             if(BedrockifyClient.getInstance().settings.hotBarOverhang)
                 drawContext.fill(x,y + height - screenBorder,x+width,y+height+1 - screenBorder, ColorHelper.getArgb((int)(255 * BedrockifyClient.getInstance().hudOpacity.getHudOpacity(false)),0,0,0));
         }else{
